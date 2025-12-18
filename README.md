@@ -1,6 +1,6 @@
 <div align="center">
 
-# astrbot_plugin_setu
+# astrbot_plugins_setu
 
 _✨ 一个从API获取图片的插件 ✨_
 
@@ -23,7 +23,7 @@ _✨ 一个从API获取图片的插件 ✨_
 
 ## 📦 安装
 
-在 AstrBot 的插件市场中搜索 `astrbot_plugin_setu` 并安装。
+在 AstrBot 的插件市场中搜索 `astrbot_plugins_setu` 并安装。
 
 ## ⚙️ 配置
 

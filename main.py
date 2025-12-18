@@ -3,7 +3,7 @@ from astrbot.api.event import filter, AstrMessageEvent, MessageEventResult
 from astrbot.api.star import Context, Star, register
 import aiohttp
 
-@register("astrbot_plugin_setu", "czqwq", "从API获取图片。使用 /img 获取一张随机图片。", "1.0")
+@register("astrbot_plugins_setu", "czqwq", "从API获取图片。使用 /img 获取一张随机图片。", "1.0")
 class SetuPlugin(Star):
     def __init__(self, context: Context, config: dict):
         super().__init__(context)
