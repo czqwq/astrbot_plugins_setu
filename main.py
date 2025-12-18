@@ -3,7 +3,7 @@ from astrbot.api.event import filter, AstrMessageEvent, MessageEventResult
 from astrbot.api.star import Context, Star, register
 import aiohttp
 
-@register("astrbot_plugin_setu", "czqwq", "从API获取随机图片。使用 /img 获取一张随机图片。", "1.0")
+@register("astrbot_plugin_setu", "czqwq", "从API获取图片。使用 /img 获取一张随机图片。", "1.0")
 class SetuPlugin(Star):
     def __init__(self, context: Context, config: dict):
         super().__init__(context)
@@ -11,16 +11,63 @@ class SetuPlugin(Star):
         self.api_url = config.get("api_url", "")
         # 获取自定义指令列表，默认为 ["img"]
         self.custom_commands = config.get("custom_commands", ["img"])
-        # 注册自定义指令
-        for cmd in self.custom_commands:
-            self.register_filter(filter.command(cmd)(self.get_setu))
 
+    @filter.command("img")
     async def get_setu(self, event: AstrMessageEvent):
+        # 检查指令是否在自定义指令列表中
+        if "img" not in self.custom_commands:
+            return
+            
         # 检查黑白名单权限
         if not self.check_permission(event):
             # 如果没有权限，不返回任何内容，静默忽略
             return
         
+        return await self._fetch_and_send_image(event)
+    
+    @filter.command("setu")
+    async def get_setu_alt1(self, event: AstrMessageEvent):
+        # 检查指令是否在自定义指令列表中
+        if "setu" not in self.custom_commands:
+            return
+            
+        # 检查黑白名单权限
+        if not self.check_permission(event):
+            # 如果没有权限，不返回任何内容，静默忽略
+            return
+        
+        return await self._fetch_and_send_image(event)
+        
+    @filter.command("image")
+    async def get_setu_alt2(self, event: AstrMessageEvent):
+        # 检查指令是否在自定义指令列表中
+        if "image" not in self.custom_commands:
+            return
+            
+        # 检查黑白名单权限
+        if not self.check_permission(event):
+            # 如果没有权限，不返回任何内容，静默忽略
+            return
+        
+        return await self._fetch_and_send_image(event)
+        
+    @filter.command("pic")
+    async def get_setu_alt3(self, event: AstrMessageEvent):
+        # 检查指令是否在自定义指令列表中
+        if "pic" not in self.custom_commands:
+            return
+            
+        # 检查黑白名单权限
+        if not self.check_permission(event):
+            # 如果没有权限，不返回任何内容，静默忽略
+            return
+        
+        return await self._fetch_and_send_image(event)
+    
+    async def _fetch_and_send_image(self, event: AstrMessageEvent):
+        """
+        获取并发送图片的核心逻辑
+        """
         # 检查是否配置了API URL
         if not self.api_url:
             yield event.plain_result("\n请先在配置文件中设置API地址")
