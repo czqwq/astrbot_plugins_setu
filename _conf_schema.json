@@ -1,0 +1,33 @@
+{
+    "api_url": {
+        "description": "随机图片API地址",
+        "type": "string",
+        "hint": "填写获取随机图片的API地址",
+        "default": "",
+        "obvious_hint": true
+    },
+    "group_whitelist": {
+        "description": "群聊白名单",
+        "hint": "仅在群聊白名单里的群启用本插件功能，不填表示所有群聊都启用",
+        "type": "list",
+        "default": []
+    },
+    "group_blacklist": {
+        "description": "群聊黑名单",
+        "hint": "屏蔽黑名单中的群聊，该群消息无法触发指令(但bot管理员不受影响)",
+        "type": "list",
+        "default": []
+    },
+    "user_blacklist": {
+        "description": "用户黑名单",
+        "hint": "屏蔽黑名单里的用户，使其全局无法触发指令",
+        "type": "list",
+        "default": []
+    },
+    "custom_commands": {
+        "description": "自定义指令",
+        "hint": "可以自定义指令名称来代替默认的/img指令，一行一个",
+        "type": "list",
+        "default": ["img"]
+    }
+}
