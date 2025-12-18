@@ -3,7 +3,7 @@ from astrbot.api.event import filter, AstrMessageEvent, MessageEventResult
 from astrbot.api.star import Context, Star, register
 import aiohttp
 
-@register("astrbot_plugins_setu", "czqwq", "从API获取图片。使用 /img 获取一张随机图片。", "1.0")
+@register("astrbot_plugin_setu", "czqwq", "从API获取图片。使用 /img 获取一张随机图片。", "1.0")
 class SetuPlugin(Star):
     def __init__(self, context: Context, config: dict):
         super().__init__(context)
@@ -70,8 +70,7 @@ class SetuPlugin(Star):
         """
         # 检查是否配置了API URL
         if not self.api_url:
-            yield event.plain_result("\n请先在配置文件中设置API地址")
-            return
+            return event.plain_result("\n请先在配置文件中设置API地址")
             
         # 创建一个不验证SSL的连接上下文
         ssl_context = aiohttp.TCPConnector(verify_ssl=False)
@@ -82,12 +81,10 @@ class SetuPlugin(Star):
                     data = await response.json()
                     
                     if data["error"]:
-                        yield event.plain_result(f"\n获取图片失败：{data['error']}")
-                        return
+                        return event.plain_result(f"\n获取图片失败：{data['error']}")
                     
                     if not data["data"]:
-                        yield event.plain_result("\n未获取到图片")
-                        return
+                        return event.plain_result("\n未获取到图片")
                     
                     # 获取图片信息
                     image_data = data["data"][0]
@@ -100,10 +97,10 @@ class SetuPlugin(Star):
                         Image.fromURL(image_url)  # 从URL加载图片
                     ]
                     
-                    yield event.chain_result(chain)
+                    return event.chain_result(chain)
                     
             except Exception as e:
-                yield event.plain_result(f"\n请求失败: {str(e)}")
+                return event.plain_result(f"\n请求失败: {str(e)}")
     
     def check_permission(self, event: AstrMessageEvent) -> bool:
         """
