@@ -29,5 +29,11 @@
         "hint": "可以自定义指令名称来代替默认的/img指令，一行一个",
         "type": "list",
         "default": ["img"]
+    },
+    "max_retries": {
+        "description": "最大重试次数",
+        "hint": "当API请求失败时的最大重试次数",
+        "type": "integer",
+        "default": 3
     }
 }
