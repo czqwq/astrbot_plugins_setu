@@ -33,7 +33,7 @@
     "max_retries": {
         "description": "最大重试次数",
         "hint": "当API请求失败时的最大重试次数",
-        "type": "integer",
+        "type": "int",
         "default": 3
     }
 }
