@@ -105,12 +105,16 @@ class SetuPlugin(Star):
                         title = image_data["title"]
                         author = image_data["author"]
                         
-                        # 构建消息链
-                        chain = [
-                            Image.fromURL(image_url)  # 从URL加载图片
-                        ]
-                        
-                        return event.chain_result(chain)
+                        try:
+                            # 构建消息链
+                            chain = [
+                                Image.fromURL(image_url)  # 从URL加载图片
+                            ]
+                            
+                            return event.chain_result(chain)
+                        except Exception as e:
+                            logger.error(f"构建图片消息链失败: {str(e)}")
+                            return event.plain_result(f"\n图片发送失败，请稍后重试")
                         
                 except Exception as e:
                     logger.warning(f"第{attempt + 1}/{self.max_retries}次请求异常: {str(e)}")
